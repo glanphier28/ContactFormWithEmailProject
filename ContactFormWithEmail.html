@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>WDV341 | Contact Form With Email</title>
+    <style>
+        h1, h2 {
+            text-align: center;
+        }
+        header {
+            margin-left: -12px;
+            margin-right: -12px;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        #body-container-main {
+            margin-top: -8px;
+        }
+        textarea {
+            resize: none;
+        }
+    </style>
+    <script>
+        function verifyFirstName() {
+            console.log("Verifying First Name Field....");
+            firstName = document.querySelector("#first_name").value;
+            document.querySelector('#first_name_error').innerHTML = "";
+            if(firstName.replace(' ', '') == '') {
+                document.querySelector('#first_name_error').innerHTML = "<br><p style='margin: -20px 0px -10px 0px; color: red'>Error: First Name field is required</p>";
+                console.log("Error: First Name Field Invalid");
+                return false;
+            }
+            console.log("First Name Field Verified");
+            return true;
+        }
+        function verifyLastName() {
+            console.log("Verifying Last Name Field....");
+            lastName = document.querySelector("#last_name").value;
+            document.querySelector('#last_name_error').innerHTML = "";
+            if(lastName.replace(' ', '') == '') {
+                document.querySelector('#last_name_error').innerHTML = "<br><p style='margin: -20px 0px -10px 0px; color: red'>Error: Last Name field is required</p>";
+                console.log("Error: Last Name Field Invalid");
+                return false;
+            }
+            console.log("Last Name Field Verified");
+            return true;
+        }
+        function verifyEmail() {
+            console.log("Verifying Email Field....");
+            email = document.querySelector("#email").value;
+            document.querySelector('#email_error').innerHTML = "";
+            if(email.replace(' ', '') == '') {
+                document.querySelector('#email_error').innerHTML = "<br><p style='margin: -20px 0px -10px 0px; color: red'>Error: Email field is required</p>";
+                console.log("Error: Email Field Invalid");
+                return false;
+            }
+            console.log("Email Field Verified");
+            return true;
+        }
+        function verifyReasonForContact() {
+            console.log("Verifying Contact Reason Field....");
+            reason = document.querySelector("#contact_reason").value;
+            if (reason == "contact_default") {
+                document.querySelector('#contact_reason_error').innerHTML = "<br><p style='margin: -20px 0px -10px 0px; color: red'>Error: Contact Reason field is required</p>";
+                console.log("Error: Contact Reason Field Invalid");
+                return false;
+            }
+            return true;
+        }
+        function verifyCommentBox() {
+            console.log("Verifying Comments....")
+            comments = document.querySelector("#contact_form_commentbox").value
+            if (comments == '') {
+                document.querySelector('#contact_form_commentbox_error').innerHTML = "<br><p style='margin: -20px 0px -10px 0px; color: red'>Error: Comment field is required</p>";
+                console.log("Error: Comment Field Invalid");
+                return false;
+            }
+        }
+
+        function verifyInput() {
+            inputCorrect = true;
+            if (!verifyFirstName()) {
+                inputCorrect = false;
+            }
+            if (!verifyLastName()) {
+                inputCorrect = false;
+            }
+            if (!verifyEmail()) {
+                inputCorrect = false;
+            }
+            if (!verifyReasonForContact()) {
+                inputCorrect = false;
+            }
+            
+            
+            return inputCorrect;
+        }
+
+        function resetErrors() {
+            document.querySelector('#first_name_error').innerHTML = "";
+            document.querySelector('#last_name_error').innerHTML = "";
+            document.querySelector('#email_error').innerHTML = "";
+            document.querySelector('#contact_reason_error').innerHTML = "";
+        }
+    </script>
+</head>
+<body>
+    
+        <header class="bg-primary">
+            <div class="container-fluid">
+                <h1>WDV341</h1>
+                <h2>Contact Form With Email</h2>
+                <br>
+            </div>
+        </header>
+        <div class="container shadow-sm bg-white rounded-bottom" id="body-container-main">
+        <h3></h3> 
+        <br>
+        <div class="container" id="form-container">
+            <div class="row">
+            <div class="col-6">
+            <form action="formHandler.php" method="post" onsubmit="return verifyInput()">
+                <div class="row">
+                    <div class="col s12 m5">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                <label for="first_name">First Name*</label>
+                                <br>
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" />
+                                <span id="first_name_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                <label for="last_name">Last Name*</label> 
+                                <br>
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" />
+                                <span id="last_name_error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="email">Email*</label> 
+                                <br>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com"/>
+                                <span id="email_error"></span>
+                            </div>
+                            
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="contact_reason">Reason for Contact*</label>
+                                    <br>
+                                    <select name="contact_reason" id="contact_reason" class="form-select">
+                                        <option value="contact_default" selected hidden>Select an Option</option>
+                                        <option value="general inquiry">General Inquiry</option>
+                                        <option value="urgent message">Urgent Message</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <span id="contact_reason_error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="contact_comments">Comments</label>
+                                    <br>
+                                    <textarea class="form-control" name="commentBox" id="contact_form_commentbox" rows="3" placeholder="Add a comment here..."></textarea>
+                                    <span id="contact_form_commentbox_error">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4" style="align-items: right">
+                        <button type="reset" class="btn btn-outline-secondary" onclick="resetErrors()">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </div>
+                <br>
+            </form>  
+            <br>
+            </div>
+            <div class="col-6">
+                <p>Fill out the form and click submit to enter!</p>
+            </div>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>
